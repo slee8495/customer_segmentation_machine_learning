@@ -25,9 +25,6 @@ the mall customers dataset into R and explore it
 ## 2.1: Import the "Mall_Customers.csv" data 
 data <- read.csv("Mall_Customers.csv")
 
-## 2.2: View the dataset
-View(data)
-
 ## 2.3: Check the names of columns and structure of the dataset
 names(data)
 str(data)
@@ -99,13 +96,6 @@ ggplot(data, aes(x = spending_score, y= Gender)) +
 In this task, we will understand the theory and intuition
 behind the K-Means Algorithm
 
-```{r pressure, echo=FALSE, fig.cap="K-Means Intuition", out.width = '100%'}
-knitr::include_graphics("k-means-explained.png")
-
-#Source: K-Means Clustering Ayush Kalla on Data Driven Investor
-# https://medium.datadriveninvestor.com/k-means-clustering-4a700d4a4720 
-```
-
 ```{r}
 ## Steps for K-Means Algorithm:
 # 1. Choose the number of clusters "K"
@@ -118,26 +108,21 @@ knitr::include_graphics("k-means-explained.png")
 #Source: A course by Dr. Ryan Ahmed on Unsupervised Machine Learning
 ```
 
-```{r pressure, echo=FALSE, fig.cap="Steps for K-Means Algorithm", out.width = '100%'}
-knitr::include_graphics("Steps-of-the-K-mean-clustering-algorithm.png")
-
-#Source: Analysis of an Event Forecasting Method for Wireless Sensor Networks by Andras Kalmar et al.
-```
-
 #Task Six: Determine the number of clusters
 In this task, we will learn how to get the optimal
 number of clusters for the data
 ```{r}
 
 ## Mini-challenge 4: Set seed to 125
-
+set.seed(125)
 
 ## 6.1: Get the optimal number of clusters
-
+stat_gap <- cluster::clusGap(data[, 3:5], FUN = kmeans, nstart = 25,
+                            K.max = 10, B = 50)
 
 ## Mini-challenge 5: Plot the optimal number of clusters 
 ## using the plot function
-
+plot(stat_gap)
 
 ```
 
