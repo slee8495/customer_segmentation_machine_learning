@@ -116,7 +116,7 @@ number of clusters for the data
 ## Mini-challenge 4: Set seed to 125
 set.seed(125)
 
-## 6.1: Get the optimal number of clusters
+## 6.1: Get the optimal number of clusters  # this will tell you how many clusters is the optimal point (look for consistency)
 stat_gap <- cluster::clusGap(data[, 3:5], FUN = kmeans, nstart = 25,
                             K.max = 10, B = 50)
 
@@ -132,13 +132,11 @@ for the data
 ```{r}
 
 ## 7.1: Create the customer clusters with KMeans
-
-
-## Print the result
-
-
+k6 <- kmeans(data[, 3:5], 6, iter.max = 100, nstart = 50,
+             algorithm = "Lloyd")   # 6 is figured out right above
+k6
 ## 7.2: Show the six KMeans clusters
-clusplot(data, k6$cluster, color=TRUE, shade=TRUE, labels=0, lines=0)
+cluster::clusplot(data, k6$cluster, color=TRUE, shade=TRUE, labels=0, lines=0)
 
 ```
 
@@ -186,3 +184,8 @@ ggplot(data, aes(x = annual_income , y = spending_score)) +
 
 ## Mini-challenge 7: Repeat task 7, 8 and 9 with different number of clusters
 ```
+
+
+# Now it's time to organize in your ML library
+
+
