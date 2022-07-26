@@ -117,6 +117,7 @@ number of clusters for the data
 set.seed(125)
 
 ## 6.1: Get the optimal number of clusters  # this will tell you how many clusters is the optimal point (look for consistency)
+# In this case, 6 is the most ideal cluster numbers
 stat_gap <- cluster::clusGap(data[, 3:5], FUN = kmeans, nstart = 25,
                             K.max = 10, B = 50)
 
@@ -133,7 +134,7 @@ for the data
 
 ## 7.1: Create the customer clusters with KMeans
 k6 <- kmeans(data[, 3:5], 6, iter.max = 100, nstart = 50,
-             algorithm = "Lloyd")   # 6 is figured out right above
+             algorithm = "Lloyd")   # 6 is figured right above
 k6
 ## 7.2: Show the six KMeans clusters
 cluster::clusplot(data, k6$cluster, color=TRUE, shade=TRUE, labels=0, lines=0)
@@ -144,23 +145,14 @@ cluster::clusplot(data, k6$cluster, color=TRUE, shade=TRUE, labels=0, lines=0)
 In this task, we will perform Principal Component Analysis
 and apply it to the dataset
 
-```{r pressure, echo=FALSE, fig.cap="PCA-explained", out.width = '100%'}
-knitr::include_graphics("pca.jpg")
-
-#Source: A complete guide to Principal Component Analysis - PCA in Machine Learning
-# https://ashutoshtripathi.com/2019/07/11/a-complete-guide-to-principal-component-analysis-pca-in-machine-learning/
-```
-
 ```{r}
 
 ## 8.1: Perform Principal Component Analysis
-
-
-## Mini-challenge 6: Check the summary of the PCA model
-
+pcclust <- prcomp(data[, 3:5], scale = FALSE)
+summary(pcclust)
 
 ## 8.2: Apply the PCA model on the data
-
+pcclust$rotation[, 1:2]
 
 ```
 
@@ -168,19 +160,17 @@ knitr::include_graphics("pca.jpg")
 In this task, we will learn how to visualize the
 different customers clusters for the mall customers data
 ```{r}
-
-## 9.1: Set seed to 1
 set.seed(1)
 
 ## 9.2: Create a plot of the customers segments
-ggplot(data, aes(x = annual_income , y = spending_score)) + 
-  geom_point(stat = "identity", aes(color = as.factor(k6$cluster))) +
-  scale_color_discrete(name = " ", 
-                       breaks=c("1", "2", "3", "4", "5","6"),
-                       labels=c("Cluster 1", "Cluster 2", "Cluster 3", 
-                                "Cluster 4", "Cluster 5","Cluster 6")) +
-  ggtitle("Segments of Mall Customers", 
-          subtitle = "Using K-means Clustering")
+ggplot2::ggplot(data = data, mapping = aes(x = annual_income , y = spending_score)) + 
+  ggplot2::geom_point(stat = "identity", mapping = aes(color = as.factor(k6$cluster))) +
+  ggplot2::scale_color_discrete(name = NULL,
+                                breaks=c("1", "2", "3", "4", "5","6"),
+                                labels=c("Cluster 1", "Cluster 2", "Cluster 3",
+                                         "Cluster 4", "Cluster 5","Cluster 6")) +
+  ggplot2::labs(title = "Segments of Mall Customers", 
+                subtitle = "Using K-means Clustering")
 
 ## Mini-challenge 7: Repeat task 7, 8 and 9 with different number of clusters
 ```
