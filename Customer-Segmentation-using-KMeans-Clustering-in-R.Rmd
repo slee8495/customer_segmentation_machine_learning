@@ -1,7 +1,7 @@
 ---
-title: "Customer Segmentation using K-Means Clustering in R"
-author: "Olayinka Arimoro"
-date: "May 17, 2021"
+title: "Customer Segmentation using K-Means Clustering in R - Coursera Guided Project"
+author: "slee"
+date: "Aug 16, 2022"
 output: html_document
 ---
 
