@@ -23,8 +23,10 @@ the mall customers dataset into R and explore it
 ```{r}
 
 ## 2.1: Import the "Mall_Customers.csv" data 
-data <- read.csv("Mall_Customers.csv")
+# data <- read.csv("Mall_Customers.csv")
+# save(data, file = "mall_customers.rds")
 
+load("mall_customers.rds")
 ## 2.3: Check the names of columns and structure of the dataset
 names(data)
 str(data)
