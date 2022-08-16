@@ -27,6 +27,7 @@ the mall customers dataset into R and explore it
 # save(data, file = "mall_customers.rds")
 
 load("mall_customers.rds")
+data <- mall_customers
 ## 2.3: Check the names of columns and structure of the dataset
 names(data)
 str(data)
